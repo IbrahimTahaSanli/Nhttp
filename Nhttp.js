@@ -129,7 +129,7 @@ class RouteStack{
         if(text != undefined)
         text.split(";").forEach(elem=>{
             let str = elem.split('=')
-            retVal[str[0].replace("-", "_").replace(" ", "")] = str[1];
+            retVal[str[0].replace("-", "_").replace(" ", "")] = str.splice(1).join("=");
         });
     
         return retVal;
@@ -143,5 +143,9 @@ class RouteStack{
             l.push(key+"="+value+";Domain=" + this.opts.DomainName)
             this.res.setHeader("Set-Cookie", l );
         }
+    }
+
+    getPathAsArray(){
+        return this.req.url.split("/").slice(1)
     }
 }

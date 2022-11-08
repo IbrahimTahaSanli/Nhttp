@@ -24,6 +24,9 @@ class JWT{
     static verifyToken(token){
         let arr = token.split(".");
 
+        if(arr.length != 3)
+            return false;
+
         if(JWT.createHash(arr[0] + "." + arr[1]) === arr[2])
             return true;
         return false;
